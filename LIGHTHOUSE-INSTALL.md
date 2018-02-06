@@ -3,18 +3,25 @@
 
 The Lighthouse search engine depends on version 5.x of the Elasticsearch service and does not support 6.x at this time.
 
+
 ```
 apt install curl apt-transport-https
 curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
 apt update
 apt install elasticsearch
+```
+
 
 Enable the Elasticsearch service with these commands:
 
-> systemctl daemon-reload
-> systemctl enable elasticsearch.service
-> systemctl start elasticsearch.service
+
+```
+systemctl daemon-reload
+systemctl enable elasticsearch.service
+systemctl start elasticsearch.service
+```
+
 
 The service does not start instantly, but should come up in less than a minute. You can check Elasticsearch's status like this:
 
