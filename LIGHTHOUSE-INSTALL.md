@@ -30,6 +30,14 @@ The service does not start instantly, but should come up in less than a minute. 
 netstat -plant | grep "9[23]00"
 ```
 
+And the response should look something like this:
+
+```
+tcp6       0      0 127.0.0.1:9200          :::*                    LISTEN      1055/java       
+tcp6       0      0 ::1:9200                :::*                    LISTEN      1055/java       
+tcp6       0      0 127.0.0.1:9300          :::*                    LISTEN      1055/java       
+tcp6       0      0 ::1:9300                :::*                    LISTEN      1055/java   
+```
 
 Lighthouse accesses the Elasticsearch API via TCP/9200. The service on port TCP/9300 is Elasticsearch's inter-cluster communiations port, which we do not use, but which will remain visible so long as the daemon is running.
 
