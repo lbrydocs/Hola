@@ -17,6 +17,23 @@ apt update
 apt install yarn
 ```
 
+This will install Node version 8. The commands are correct, there is an apt update in the install script.
+
+```
+curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+./nodesource_setup.sh
+apt install nodejs
+```
+
+The LBRY blockchain is a fork of the Bitcoin blockchain with media related enhacements, but the system depends on the well tested Bitcoin libraries.
+
+```
+add-apt-repository ppa:bitcoin/bitcoin
+apt-get update
+apt-get install libdb4.8-dev libdb4.8++-dev
+```
+
+
 ### Elasticsearch
 
 The Lighthouse search engine depends on version 5.x of the Elasticsearch service and does not support 6.x at this time.
@@ -84,25 +101,6 @@ And your response should be similar to this:
 }
 ```
 
-### Node v8
-
-This will install Node version 8. The commands are correct, there is an apt update in the install script.
-
-```
-curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
-./nodesource_setup.sh
-apt install nodejs
-```
-
-### Bitcoin libraries
-
-The LBRY blockchain is a fork of the Bitcoin blockchain with media related enhacements, but the system depends on the well tested Bitcoin libraries.
-
-```
-add-apt-repository ppa:bitcoin/bitcoin
-apt-get update
-apt-get install libdb4.8-dev libdb4.8++-dev
-```
 
 ### lbrycrd daemon
 
