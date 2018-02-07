@@ -162,5 +162,23 @@ cd ~/lighthouse/decoder
 pip install -r requirements.txt
 ```
 
-Activate the service 
+Configure the service 
 
+cat > /etc/systemd/system/lighthouse.service
+[Unit]
+Description="Lighthouse service"
+After=network.target
+
+[Service]
+Environment="HOME=/root"
+Environment="PORT=50005"
+ExecStart=/usr/bin/node /root/lighthouse/dist/index.js
+User=root
+Group=root
+Restart=on-failure
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+ctrl-d
+```
