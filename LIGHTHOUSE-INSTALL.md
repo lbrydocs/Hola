@@ -1,4 +1,3 @@
-
 # Prerequisites:
 
 ### Elasticsearch
@@ -111,6 +110,19 @@ And then enable the service:
 ```
 systemctl enable lbrycrdd.service
 systemctl start lbrycrdd.service
+```
+
+You can check the lbrycrd service:
+
+```
+netstat -plant | grep "924" | grep "LISTEN"
+```
+
+And you should find these two ports active:
+
+```
+tcp        0      0 127.0.0.1:9245          0.0.0.0:*               LISTEN      1047/lbrycrdd   
+tcp        0      0 127.0.0.1:9246          0.0.0.0:*               LISTEN      1047/lbrycrdd   
 ```
 
 ## Running Lighthouse
