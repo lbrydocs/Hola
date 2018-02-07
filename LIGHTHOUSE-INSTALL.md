@@ -169,7 +169,7 @@ Configure the Decoder
 
 
 ```
-cat > cat > /etc/systemd/system/decoder.service
+cat > /etc/systemd/system/decoder.service
 [Unit]
 Description="Lighthouse claim decoder"
 After=network.target
