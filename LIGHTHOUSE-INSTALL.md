@@ -162,7 +162,7 @@ cd ~/lighthouse/decoder
 pip install -r requirements.txt
 ```
 
-Configure the service 
+Configure the service:
 
 ```
 cat > /etc/systemd/system/lighthouse.service
@@ -182,5 +182,25 @@ KillMode=process
 [Install]
 WantedBy=multi-user.target
 ctrl-d
+```
+
+Activate the service:
+
+```
+systemctl daemon-reload
+systemctl enable elasticsearch.service
+systemctl start elasticsearch.service
+```
+
+Wait a minute or so, then test the service:
+
+```
+netstat -plant | grep "50005"
+````
+
+And you should have a running service on TCP/50005 which is accessible to the world.
+
+```
+tcp6       0      0 :::50005                :::*                    LISTEN      1043/node 
 ```
 
