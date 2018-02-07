@@ -1,6 +1,8 @@
 
 ## Prerequisites:
 
+#Elasticsearch
+
 The Lighthouse search engine depends on version 5.x of the Elasticsearch service and does not support 6.x at this time.
 
 
