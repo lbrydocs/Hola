@@ -78,7 +78,40 @@ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 apt install nodejs
 ```
 
+### lbrycrd daemon
 
+Lighthouse gathers information from the LBRY blockchain and enters it into Elasticsearch. This will install the latest version of the daemon.
+
+```
+wget https://github.com/lbryio/lbrycrd/releases/download/v0.12.1.0/lbrycrd-linux.zip
+unzip lbrycrd-linux.zip
+```
+
+Once unzipped you configure the daemon
+
+```
+cd .lbrycrd/
+cat >  lbrycrd.conf
+port=9246
+bind=127.0.0.1
+
+rpcallowip=127.0.0.1
+rpcbind=127.0.0.1
+rpcport=9245
+rpcuser=lbryrpc
+rpcpassword=securepassw0rd
+
+server=1
+txindex=1
+ctrl-d
+```
+
+And then enable the service:
+
+```
+systemctl enable lbrycrdd.service
+systemctl start lbrycrdd.service
+```
 
 ## Running Lighthouse
 ### Prerequisites
