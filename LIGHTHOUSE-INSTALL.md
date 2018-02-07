@@ -153,7 +153,10 @@ tcp        0      0 127.0.0.1:9245          0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:9246          0.0.0.0:*               LISTEN      1047/lbrycrdd   
 ```
 
-### Lighthouse daemon
+
+
+
+### Decoder & Lighthouse daemon
 
 ```
 cd
@@ -162,7 +165,29 @@ cd ~/lighthouse/decoder
 pip install -r requirements.txt
 ```
 
-Configure the service:
+Configure the Decoder
+
+
+```
+cat > cat > /etc/systemd/system/decoder.service
+[Unit]
+Description="Lighthouse claim decoder"
+After=network.target
+
+[Service]
+Environment="HOME=/root"
+ExecStart=/usr/bin/python /root/lighthouse/decoder/decoder.py
+User=root
+Group=root
+Restart=on-failure
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+ctrl-d
+```
+
+Configure Lighthouse:
 
 ```
 cat > /etc/systemd/system/lighthouse.service
@@ -184,12 +209,14 @@ WantedBy=multi-user.target
 ctrl-d
 ```
 
-Activate the service:
+Activate the services:
 
 ```
 systemctl daemon-reload
-systemctl enable elasticsearch.service
-systemctl start elasticsearch.service
+systemctl enable decoder.service
+systemctl start decoder.service
+systemctl enable lighthouse.service
+systemctl start lighthouse.service
 ```
 
 Wait a minute or so, then test the service:
