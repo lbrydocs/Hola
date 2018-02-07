@@ -164,6 +164,7 @@ pip install -r requirements.txt
 
 Configure the service 
 
+```
 cat > /etc/systemd/system/lighthouse.service
 [Unit]
 Description="Lighthouse service"
