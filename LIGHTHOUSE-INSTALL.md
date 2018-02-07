@@ -35,14 +35,14 @@ Lighthouse accesses the Elasticsearch API via TCP/9200. The service on port TCP/
 
 You can examine the actual service using curl:
 
-
+```
  curl -GET http://localhost:9200/
-
+```
 
 
 And your response should be similar to this:
 
-
+```
 {
   "name" : "s59WZF5",
   "cluster_name" : "elasticsearch",
@@ -56,7 +56,7 @@ And your response should be similar to this:
   },
   "tagline" : "You Know, for Search"
 }
-
+```
 
 
 
