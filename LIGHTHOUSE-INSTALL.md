@@ -153,3 +153,14 @@ tcp        0      0 127.0.0.1:9245          0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:9246          0.0.0.0:*               LISTEN      1047/lbrycrdd   
 ```
 
+### Lighthouse daemon
+
+```
+cd
+git clone https://github.com/lbryio/lighthouse.git
+cd ~/lighthouse/decoder
+pip install -r requirements.txt
+```
+
+Activate the service 
+
