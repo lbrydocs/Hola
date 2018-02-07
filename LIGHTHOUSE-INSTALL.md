@@ -1,5 +1,22 @@
 # Prerequisites:
 
+### Basics
+
+Lighthouse requires Python and Java
+```
+apt update
+apt install python-pip nodejs-legacy unzip default-jre-headless
+```
+
+Lighthouse also needs the Yarn package manager. 
+
+```
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+apt update
+apt install yarn
+```
+
 ### Elasticsearch
 
 The Lighthouse search engine depends on version 5.x of the Elasticsearch service and does not support 6.x at this time.
@@ -77,20 +94,33 @@ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 apt install nodejs
 ```
 
-### lbrycrd daemon
+### Bitcoin libraries
 
-Lighthouse gathers information from the LBRY blockchain and enters it into Elasticsearch. This will install the latest version of the daemon.
+The LBRY blockchain is a fork of the Bitcoin blockchain with media related enhacements, but the system depends on the well tested Bitcoin libraries.
 
 ```
+add-apt-repository ppa:bitcoin/bitcoin
+apt-get update
+apt-get install libdb4.8-dev libdb4.8++-dev
+```
+
+### lbrycrd daemon
+
+Lighthouse gathers information from the LBRY blockchain and enters it into Elasticsearch. This will install the latest version of the LBRY blockchain daemon.
+
+```
+cd
+mkdir lbrycrd
+cd lbrycrd
 wget https://github.com/lbryio/lbrycrd/releases/download/v0.12.1.0/lbrycrd-linux.zip
 unzip lbrycrd-linux.zip
+mkdir ~/.lbrycrd
 ```
 
 Once unzipped you configure the daemon
 
 ```
-cd .lbrycrd/
-cat >  lbrycrd.conf
+cat >  ~/.lbrycrd/lbrycrd.conf
 port=9246
 bind=127.0.0.1
 
@@ -125,9 +155,5 @@ tcp        0      0 127.0.0.1:9245          0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:9246          0.0.0.0:*               LISTEN      1047/lbrycrdd   
 ```
 
-## Running Lighthouse
-### Prerequisites
-* Node v8
 * Yarn 
 * Python2.7
-* [Elasticsearch](https://www.elastic.co/downloads/elasticsearch)
