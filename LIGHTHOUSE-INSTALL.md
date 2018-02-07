@@ -68,6 +68,15 @@ And your response should be similar to this:
 }
 ```
 
+### Node v8
+
+This will install Node version 8. The commands are correct, there is an apt update in the install script.
+
+```
+curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+./nodesource_setup.sh
+apt install nodejs
+```
 
 
 
