@@ -1,0 +1,13 @@
+[Unit]
+Description="LBRYcrd daemon"
+After=network.target
+
+[Service]
+ExecStart=/root/lbry/lbrycrd/lbrycrdd -datadir="/root/.lbrycrd"
+User=lbry
+Group=lbry
+Restart=on-failure
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
