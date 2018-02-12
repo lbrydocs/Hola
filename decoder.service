@@ -1,0 +1,14 @@
+[Unit]
+Description="Lighthouse claim decoder"
+After=network.target
+
+[Service]
+Environment="HOME=/root"
+ExecStart=/usr/bin/python /root/lighthouse/decoder/decoder.py
+User=root
+Group=root
+Restart=on-failure
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
