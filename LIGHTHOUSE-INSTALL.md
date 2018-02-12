@@ -231,3 +231,6 @@ And you should have a running service on TCP/50005 which is accessible to the wo
 tcp6       0      0 :::50005                :::*                    LISTEN      1043/node 
 ```
 
+```
+curl http://127.0.0.1:50005/status
+```
