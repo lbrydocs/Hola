@@ -1,6 +1,8 @@
 # Prerequisites:
 
-### Basics
+Clone this repository as it contains four configuration files as well as the instructions for installing Lighthouse.
+
+### Install Requirements First
 Lighthouse requires Elasticsearch, Yarn, and Bitcoin libraries
 
 ```
@@ -26,6 +28,14 @@ chmod 755 nodesource_setup.sh
 apt install nodejs
 ```
 
+### Install Service Configuration Files
+
+```
+cp decorder.service /etc/systemd/system/
+cp lbrycrdd.service /etc/systemd/system/
+cp ligthouse.service /etc/systemd/system/
+mkdir ~/.lbrycrd
+cp lbrycrd.conf ~/.lbrycrd
 
 ### Elasticsearch
 Enable the Elasticsearch service with these commands:
@@ -86,15 +96,11 @@ And your response should be similar to this:
 Lighthouse gathers information from the LBRY blockchain and enters it into Elasticsearch. Visit releases to find the latest version of the binaries.
 
 ```
-cd
-mkdir lbrycrd
-cd lbrycrd
+mkdir ~/lbrycrd
+cd ~/lbrycrd
 wget https://github.com/lbryio/lbrycrd/releases/download/v0.12.1.0/lbrycrd-linux.zip
 unzip lbrycrd-linux.zip
-mkdir ~/.lbrycrd
 ```
-
-Once unzipped you configure the daemon
 
 And then enable the service:
 
@@ -116,68 +122,27 @@ tcp        0      0 127.0.0.1:9245          0.0.0.0:*               LISTEN      
 tcp        0      0 127.0.0.1:9246          0.0.0.0:*               LISTEN      1047/lbrycrdd   
 ```
 
-
-
-
-### Decoder & Lighthouse daemon
+### Install Decoder
 
 ```
 cd
 git clone https://github.com/lbryio/lighthouse.git
 cd ~/lighthouse/decoder
 pip install -r requirements.txt
-```
-
-Configure the Decoder
-
-
-```
-cat > /etc/systemd/system/decoder.service
-[Unit]
-Description="Lighthouse claim decoder"
-After=network.target
-
-[Service]
-Environment="HOME=/root"
-ExecStart=/usr/bin/python /root/lighthouse/decoder/decoder.py
-User=root
-Group=root
-Restart=on-failure
-KillMode=process
-
-[Install]
-WantedBy=multi-user.target
-ctrl-d
-```
-
-Configure Lighthouse:
-
-```
-cat > /etc/systemd/system/lighthouse.service
-[Unit]
-Description="Lighthouse service"
-After=network.target
-
-[Service]
-Environment="HOME=/root"
-Environment="PORT=50005"
-ExecStart=/usr/bin/node /root/lighthouse/dist/index.js
-User=root
-Group=root
-Restart=on-failure
-KillMode=process
-
-[Install]
-WantedBy=multi-user.target
-ctrl-d
-```
-
-Activate the services:
 
 ```
 systemctl daemon-reload
 systemctl enable decoder.service
 systemctl start decoder.service
+```
+### Install Lighthouse
+
+cd ~/lighthouse
+
+
+Enable the service
+
+```
 systemctl enable lighthouse.service
 systemctl start lighthouse.service
 ```
@@ -193,6 +158,8 @@ And you should have a running service on TCP/50005 which is accessible to the wo
 ```
 tcp6       0      0 :::50005                :::*                    LISTEN      1043/node 
 ```
+
+You can checked the status with curl:
 
 ```
 curl http://127.0.0.1:50005/status
