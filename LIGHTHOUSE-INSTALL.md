@@ -173,9 +173,11 @@ You can checked the status with curl:
 curl http://127.0.0.1:50005/status
 ```
 
-You should find the spaceUsed parameter climbing steadily. 
+You should find the spaceUsed parameter climbing steadily, but it may take ten or fifteen minutes to reach its full amount.
 
 ```
 {"status":"gettingClaimTrie","spaceUsed":"59.1MB","claimsInIndex":0,"totSearches":1}
 ```
+
+
 
