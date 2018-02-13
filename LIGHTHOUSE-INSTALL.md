@@ -157,6 +157,7 @@ tcp        0      0 127.0.0.1:5000          0.0.0.0:*               LISTEN      
 
 ```
 cd ~/lighthouse
+./gendb.sh
 yarn install --production=false
 ```
 
