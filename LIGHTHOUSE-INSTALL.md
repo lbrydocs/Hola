@@ -137,12 +137,15 @@ systemctl start decoder.service
 ```
 ### Install Lighthouse
 
+```
 cd ~/lighthouse
-
+yarn install --production=false
+```
 
 Enable the service
 
 ```
+systemctl daemon-reload
 systemctl enable lighthouse.service
 systemctl start lighthouse.service
 ```
@@ -164,3 +167,10 @@ You can checked the status with curl:
 ```
 curl http://127.0.0.1:50005/status
 ```
+
+You should find the spaceUsed parameter climbing steadily. 
+
+```
+{"status":"gettingClaimTrie","spaceUsed":"59.1MB","claimsInIndex":0,"totSearches":1}
+```
+
