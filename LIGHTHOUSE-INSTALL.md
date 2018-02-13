@@ -155,7 +155,7 @@ Wait a minute or so, then test the service:
 
 ```
 netstat -plant | grep "50005"
-````
+```
 
 And you should have a running service on TCP/50005 which is accessible to the world.
 
