@@ -130,11 +130,15 @@ cd
 git clone https://github.com/lbryio/lighthouse.git
 cd ~/lighthouse/decoder
 pip install -r requirements.txt
+```
+
+Active Decoder Service:
 
 ```
 systemctl daemon-reload
 systemctl enable decoder.service
 systemctl start decoder.service
+
 ```
 ### Install Lighthouse
 
