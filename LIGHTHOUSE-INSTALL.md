@@ -140,6 +140,19 @@ systemctl enable decoder.service
 systemctl start decoder.service
 
 ```
+
+You can check the Decoder service like this:
+
+```
+netstat -plant | grep ":5000 "
+```
+
+And it should be found running at port 5000:
+
+```
+tcp        0      0 127.0.0.1:5000          0.0.0.0:*               LISTEN      1014/python   
+```
+
 ### Install Lighthouse
 
 ```
@@ -179,5 +192,43 @@ You should find the spaceUsed parameter climbing steadily, but it may take ten o
 {"status":"gettingClaimTrie","spaceUsed":"59.1MB","claimsInIndex":0,"totSearches":1}
 ```
 
+### Final Inspection
 
+The Lighthouse service is the most complex piece of LBRY. This is what you will find when the system is operational.
 
+Check open ports, ignoring ssh on port 22:
+
+```
+netstat -plant | grep "LIST" | grep -v ":22"
+```
+
+Find Elasticsearch running as Java apps using ports 9200 & 9300 locally. Find the Decoder running as a Python app on port 5000 locally. Find lbrycrdd running on port 9245 locally and port 9246 globally. Finally the Ligthouse service will be running as a node (JavaScript) package on port 50005 globally.
+
+```
+tcp        0      0 127.0.0.1:9245          0.0.0.0:*               LISTEN      1010/lbrycrdd   
+tcp        0      0 0.0.0.0:9246            0.0.0.0:*               LISTEN      1010/lbrycrdd   
+tcp        0      0 127.0.0.1:5000          0.0.0.0:*               LISTEN      1014/python     
+tcp6       0      0 127.0.0.1:9200          :::*                    LISTEN      1035/java       
+tcp6       0      0 ::1:9200                :::*                    LISTEN      1035/java       
+tcp6       0      0 127.0.0.1:9300          :::*                    LISTEN      1035/java       
+tcp6       0      0 ::1:9300                :::*                    LISTEN      1035/java       
+tcp6       0      0 :::50005                :::*                    LISTEN      1012/node       
+```
+
+The lbrycrd daemon will keep a full copy of the LBRY blockchain on disk. You can examine it here:
+
+```
+cd ~/.lbrycrd/
+du -m
+```
+
+This is what disk usage was like the day this documentation was created - almost 1.8 gig of storage used.
+
+```
+74	./claimtrie
+202	./chainstate
+1	./database
+209	./blocks/index
+1509	./blocks
+1789	.
+```
