@@ -36,6 +36,7 @@ cp lbrycrdd.service /etc/systemd/system/
 cp ligthouse.service /etc/systemd/system/
 mkdir ~/.lbrycrd
 cp lbrycrd.conf ~/.lbrycrd
+```
 
 ### Elasticsearch
 Enable the Elasticsearch service with these commands:
